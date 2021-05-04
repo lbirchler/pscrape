@@ -99,7 +99,7 @@ def console_print(df, ip_port=None):
             print(i)
     else:
         print('')
-        print(tabulate(df, headers='keys', tablefmt='github'))
+        print(tabulate(df, headers='keys', tablefmt='basic', showindex=False))
         print('')
 
 if __name__ == "__main__":
