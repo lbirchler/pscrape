@@ -9,7 +9,7 @@ import argparse
 
 def get_proxies(anon_level, https_only):
     """
-    gather level 1 and level 2 proxies from free-proxy-list.net
+    gather proxies from free-proxy-list.net
     """
     
     url = "https://free-proxy-list.net/"
@@ -102,6 +102,7 @@ def console_print(df, ip_port=None):
         print(tabulate(df, headers='keys', tablefmt='basic', showindex=False))
         print('')
 
+        
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-l', '--anonlevel', help='specify minimum proxy anonymity level (default = 2)', default = 2, type=int)
