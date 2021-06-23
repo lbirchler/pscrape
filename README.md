@@ -1,6 +1,6 @@
 # proxy-scraper
 
-Python script that scrapes free proxies from the web, and makes use of concurrent futures to quickly check and generate a list of working proxies
+Python script that generates a list of free and working proxies
 
 ---
 
