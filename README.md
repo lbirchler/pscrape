@@ -1,6 +1,6 @@
 # proxy-scraper
 
-Python script that generates a list of free and working proxies
+script to generate a list of free and working proxies
 
 ---
 
