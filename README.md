@@ -1,146 +1,170 @@
 # proxy-scraper
 
-script to generate a list of free and working proxies
+quickly generate a list of free and working proxies
 
 ---
 
-## Installation
+## installation
 
 ```bash
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
 
-## Usage
+## usage
 
 ```bash
-usage: proxy.py [-h] [-l ANONLEVEL] [-s] [-p]
+usage: proxy.py [-h] [-s] [-l] [-o]
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -l ANONLEVEL, --anonlevel ANONLEVEL
-                        specify minimum proxy anonymity level (default = 2)
-  -s, --https           only select proxies that support https
-  -p, --ip_port         only print list of working ip addresses and ports
+  -h, --help      show this help message and exit
+  -s, --https     only select proxies that support https
+  -l , --level    minimum anonymity level - specify level (1 = transparent, 2 = anonymous, 3 = elite)
+  -o , --output   save list of working proxies to txt file - specify path
 ```
 
-### Proxy Anonymity Levels
+### proxy anonymity levels
 
-+ Transparent proxies (level 3)
-    + Does not hide originating client IP Address
-    + Headers sent to destination server
+- transparent proxies (level 3)
+    + headers sent to destination server
         + REMOTE_ADDR: proxy IP address
         + HTTP_VIA: proxy IP address
         + HTTP_X_FORWARDER_FOR: client IP address
-
-+ Anonymous proxies (level 2)
-    + Does not provide destination server with originating client IP address but does reveal that you are using a proxy server
-    + Headers sent to destination server
+        
+- anonymous proxies (level 2)
+    + headers sent to destination server
         + REMOTE_ADDR: proxy IP address
         + HTTP_VIA: proxy IP address
         + HTTP_X_FORWARDER_FOR: proxy/random IP address
 
-+ Elite proxies (level 1)
-    + Hides originating client IP address and does not reveal to the destination server that you are using a proxy server
-    + Headers sent to destination server
+- elite proxies (level 1)
+    + headers sent to destination server
         + REMOTE_ADDR: proxy IP address (displaying as the client)
         + HTTP_VIA: null
         + HTTP_X_FORWARDER_FOR: null
 
 ---
 
-## Examples
+## examples
 
 
-### All working proxies
+### all working proxies
+
 
 ```bash
-$ python proxy.py 
+$ python proxy.py
 
-[+] Scraping proxies from https://free-proxy-list.net/....
-[+] Gathered 240 unique proxies
+[+] total scraped proxies: 284
 
-[+] Checking each proxy at https://httpbin.org/ip....
-[+] Found 15 working proxies
-
-[+] Working Proxies
-
-ip_port               country       anonymity    https    working
---------------------  ------------  -----------  -------  ---------
-202.61.51.204:3128    Pakistan      elite proxy  yes      yes
-20.195.17.90:3128     Singapore     anonymous    yes      yes
-193.56.157.39:8080    France        anonymous    yes      yes
-180.128.1.83:8080     Thailand      anonymous    yes      yes
-186.167.20.211:3128   Venezuela     anonymous    yes      yes
-162.55.37.186:10071   Germany       anonymous    yes      yes
-125.167.237.184:8080  Indonesia     anonymous    yes      yes
-169.57.1.84:8123      Mexico        elite proxy  yes      yes
-124.244.186.246:8080  Hong Kong     elite proxy  yes      yes
-103.227.254.59:80     Indonesia     anonymous    no       yes
-3.35.77.45:8080       Korea         elite proxy  no       yes
-169.57.1.85:80        Mexico        elite proxy  yes      yes
-8.210.71.64:3128      Hong Kong     anonymous    yes      yes
-160.19.232.85:3128    South Africa  anonymous    yes      yes
-193.168.153.165:8080  Turkey        elite proxy  yes      yes
+--- working proxies ---
+                              anon level     https          country
+[-] 187.216.93.20:55443       elite proxy    no             MX
+[-] 216.169.73.65:34679       elite proxy    no             US
+[-] 103.139.98.82:3127        anonymous      no             ID
+[-] 45.42.177.21:3128         elite proxy    no             US
+[-] 117.102.81.3:53281        elite proxy    no             ID
+[-] 103.147.73.115:3127       anonymous      no             ID
+[-] 140.227.72.100:6000       elite proxy    no             JP
+[-] 165.227.155.115:8888      elite proxy    yes            DE
+[-] 144.217.101.245:3129      elite proxy    yes            CA
+[-] 79.143.87.117:9090        anonymous      no             GB
+[-] 201.81.38.123:8080        elite proxy    no             BR
+[-] 134.19.254.2:21231        elite proxy    yes            GE
+[-] 54.153.183.29:80          anonymous      yes            AU
+[-] 119.81.189.194:80         elite proxy    yes            HK
+[-] 165.22.248.186:1081       elite proxy    yes            SG
+[-] 128.199.215.211:3128      elite proxy    yes            SG
+[-] 118.99.103.35:32625       elite proxy    yes            ID
+[-] 47.242.200.148:80         elite proxy    yes            HK
+[-] 140.112.105.116:80        elite proxy    yes            TW
+[-] 14.139.57.195:23500       elite proxy    yes            IN
+[-] 197.210.217.66:34808      elite proxy    no             NG
+[-] 95.216.10.237:6000        elite proxy    no             FI
+[-] 51.222.21.94:32768        elite proxy    no             CA
+[-] 161.202.226.194:80        elite proxy    yes            JP
+[-] 169.57.1.85:80            elite proxy    yes            MX
+[-] 128.199.214.87:3128       anonymous      yes            SG
+[-] 182.52.51.10:61124        elite proxy    no             TH
+[-] 119.82.252.76:51680       elite proxy    yes            KH
+[-] 62.133.168.72:55443       elite proxy    yes            RU
+[-] 112.78.170.27:8080        elite proxy    no             ID
+[-] 178.218.216.125:8085      elite proxy    yes            RU
+[-] 45.236.152.45:6666        elite proxy    no             BR
+[-] 212.175.55.46:53281       anonymous      yes            TR
 ```
 
-### Level 1/HTTPS proxies
+### level 1 (elite) and HTTPS only 
 
 ```bash
-$ python proxy.py -l 1 -s
+$ python proxy.py -l1 -s
 
-[+] Scraping proxies from https://free-proxy-list.net/....
-[+] Gathered 69 unique proxies
+[+] total scraped proxies: 91
 
-[+] Checking each proxy at https://httpbin.org/ip....
-[+] Found 6 working proxies
-
-[+] Working Proxies
-
-ip_port               country      anonymity    https    working
---------------------  -----------  -----------  -------  ---------
-36.81.69.38:3128      Indonesia    elite proxy  yes      yes
-169.57.1.84:8123      Mexico       elite proxy  yes      yes
-124.244.186.246:8080  Hong Kong    elite proxy  yes      yes
-194.5.206.148:3128    Netherlands  elite proxy  yes      yes
-169.57.1.85:80        Mexico       elite proxy  yes      yes
-41.217.219.53:31398   Malawi       elite proxy  yes      yes
-
+--- working proxies ---
+                              anon level     https          country
+[-] 115.21.87.201:8080        elite proxy    yes            KR
+[-] 91.121.132.164:8888       elite proxy    yes            FR
+[-] 91.216.66.70:32306        elite proxy    yes            RU
+[-] 201.81.38.123:8080        elite proxy    yes            BR
+[-] 45.234.200.18:53281       elite proxy    yes            BR
+[-] 47.245.33.211:8118        elite proxy    yes            JP
+[-] 118.172.177.168:8080      elite proxy    yes            TH
+[-] 144.217.101.245:3129      elite proxy    yes            CA
+[-] 46.0.108.86:55443         elite proxy    yes            RU
+[-] 119.81.189.194:80         elite proxy    yes            HK
+[-] 14.139.57.195:23500       elite proxy    yes            IN
+[-] 128.199.215.211:3128      elite proxy    yes            SG
+[-] 169.57.1.85:80            elite proxy    yes            MX
+[-] 200.32.51.179:8080        elite proxy    yes            AR
+[-] 161.202.226.194:80        elite proxy    yes            JP
 ```
 
-### Print ip:port only
+### export list of proxies to txt file 
 
 ```bash
-$ python proxy.py -l 1 -s -p
+$ python proxy.py -l1 -s -o proxies.txt
 
-[+] Scraping proxies from https://free-proxy-list.net/....
-[+] Gathered 75 unique proxies
+[+] total scraped proxies: 91
 
-[+] Checking each proxy at https://httpbin.org/ip....
-[+] Found 16 working proxies
+--- working proxies ---
+                              anon level     https          country
+[-] 91.121.132.164:8888       elite proxy    yes            FR
+[-] 190.151.94.3:46615        elite proxy    yes            CL
+[-] 140.227.72.100:6000       elite proxy    yes            JP
+[-] 110.172.160.42:44047      elite proxy    yes            IN
+[-] 195.170.38.230:8080       elite proxy    yes            RU
+[-] 119.81.189.194:80         elite proxy    yes            HK
+[-] 150.109.151.179:1081      elite proxy    yes            HK
+[-] 165.22.248.186:1081       elite proxy    yes            SG
+[-] 128.199.215.211:3128      elite proxy    yes            SG
+[-] 169.57.1.85:80            elite proxy    yes            MX
+[-] 161.202.226.194:80        elite proxy    yes            JP
+[-] 200.32.51.179:8080        elite proxy    yes            AR
+[-] 83.167.203.174:50128      elite proxy    yes            NL
 
-[+] Working Proxies
+[+] proxy list saved to: proxies.txt
+```
 
-169.57.1.84:8123
-198.50.163.192:3129
-24.248.207.7:55443
-186.159.3.41:30334
+*list can be used to rotate requests through while web scraping*
+
+```bash
+$ cat proxies.txt 
+
+190.151.94.3:46615
+91.121.132.164:8888
+140.227.72.100:6000
+110.172.160.42:44047
+195.170.38.230:8080
+150.109.151.179:1081
+119.81.189.194:80
+165.22.248.186:1081
+128.199.215.211:3128
+200.32.51.179:8080
+83.167.203.174:50128
+161.202.226.194:80
 169.57.1.85:80
-118.173.232.5:34413
-144.217.101.245:3129
-110.78.168.225:18960
-51.222.67.208:32768
-101.109.255.18:50538
-59.94.176.111:3128
-181.129.43.3:8080
-51.222.67.214:32768
-132.248.196.2:8080
-51.222.67.220:32768
-69.65.65.178:58389
 ```
-
----
 
 ### References
 + https://free-proxy-list.net/
