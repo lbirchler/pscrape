@@ -94,7 +94,7 @@ $ python proxy.py
 [-] 212.175.55.46:53281       anonymous      yes            TR
 ```
 
-### level 1 (elite) and HTTPS only 
+### level 1 (elite) and https only 
 
 ```bash
 $ python proxy.py -l1 -s
@@ -166,7 +166,7 @@ $ cat proxies.txt
 169.57.1.85:80
 ```
 
-### References
+### references
 + https://free-proxy-list.net/
 + https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling
 + https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
