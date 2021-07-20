@@ -45,12 +45,6 @@ def scrape_proxies(level, https) -> list:
                     "https": cols[6].text.strip(),
                     "country_code": cols[2].text.strip()
                 }
-                # # extract values from table
-                # ip = cols[0].text.strip()
-                # port = cols[1].text.strip()
-                # anon = cols[4].text.strip()
-                # https = cols[6].text.strip()
-                # apply filters
                 if d["anon"] in anon_filt[level] and d["https"] in https_filt[https]:
                     proxy_list.append(d)
                     # proxy_list.append(f"{ip}:{port}")
@@ -109,10 +103,6 @@ if __name__ == "__main__":
                         help="minimum anonymity level - specify level (1 = transparent, 2 = anonymous, 3 = elite)", metavar='')
     parser.add_argument("-o", "--output", type=str,
                         help="save list of working proxies to txt file - specify path", metavar='')
-
-    if len(sys.argv) < 1:
-        parser.print_help()
-        sys.exit(1)
     args = parser.parse_args()
 
     # scrape proxies
