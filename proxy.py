@@ -8,8 +8,7 @@ import tabulate
 
 
 def scrape_proxies(level, https) -> list:
-    """
-    Scrape proxy list from https://free-proxy-list.net/
+    """Scrape proxy list from https://free-proxy-list.net/
     :level: minimum anonymity level (1 = transparent, 2 = anonymous, 3 = elite)
     :https: only select proxies that support https (True or False)
     :returns: list of dictionaries
@@ -22,6 +21,8 @@ def scrape_proxies(level, https) -> list:
         3: ["elite proxy", "anonymous", "transparent"],
     }
     https_filt = {0: ["yes", "no"], 1: ["yes"]}
+    country_blacklist = ["HK", "RU", "IR", "KP"]
+
 
     # scrape table
     url = "https://free-proxy-list.net/"
@@ -45,7 +46,7 @@ def scrape_proxies(level, https) -> list:
                     "https": cols[6].text.strip(),
                     "country_code": cols[2].text.strip()
                 }
-                if d["anon"] in anon_filt[level] and d["https"] in https_filt[https]:
+                if d["anon"] in anon_filt[level] and d["https"] in https_filt[https] and d["country_code"] not in country_blacklist:
                     proxy_list.append(d)
                     # proxy_list.append(f"{ip}:{port}")
             except IndexError:
