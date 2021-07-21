@@ -23,7 +23,6 @@ def scrape_proxies(level, https) -> list:
     https_filt = {0: ["yes", "no"], 1: ["yes"]}
     country_blacklist = ["HK", "RU", "IR", "KP"]
 
-
     # scrape table
     url = "https://free-proxy-list.net/"
     r = requests.get(url)
@@ -46,9 +45,9 @@ def scrape_proxies(level, https) -> list:
                     "https": cols[6].text.strip(),
                     "country_code": cols[2].text.strip()
                 }
+                # apply filters
                 if d["anon"] in anon_filt[level] and d["https"] in https_filt[https] and d["country_code"] not in country_blacklist:
                     proxy_list.append(d)
-                    # proxy_list.append(f"{ip}:{port}")
             except IndexError:
                 continue
 
