@@ -7,8 +7,8 @@ quickly generate a list of free and working proxies
 
 ## Installation
 
-```bash
-pip install pscrape 
+```
+python3 -m pip install pscrape 
 ```
 
 ---
