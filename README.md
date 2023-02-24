@@ -1,4 +1,4 @@
-# proxy-scrape
+# pscrape
 
 quickly generate a list of free and working proxies
 
@@ -8,7 +8,7 @@ quickly generate a list of free and working proxies
 ## Installation
 
 ```bash
-pip install -r requirements.txt
+pip install pscrape 
 ```
 
 ---
@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```
->>> from proxy_scraper import Proxies
+>>> from pscrape import Proxies
 >>>
 >>> proxies = Proxies(country='US', anon='elite', https=True).scrape()
 >>> proxies
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ### CLI
 ```
-usage: proxy-scraper [-h] [-c COUNTRY] [-a {anonymous,elite,transparent}] [--https]
+usage: pscraper [-h] [-c COUNTRY] [-a {anonymous,elite,transparent}] [--https]
                     [-o OUTPUT_FILE]
 
 optional arguments:
@@ -50,7 +50,7 @@ optional arguments:
 Example:
 
 ```
-$ proxy-scraper -c US --https -o /tmp/proxies.txt
+$ pscraper -c US --https -o /tmp/proxies.txt
 ```
 
 ```
