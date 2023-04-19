@@ -33,7 +33,7 @@ python3 -m pip install pscrape
 
 ### CLI
 ```
-usage: pscraper [-h] [-c COUNTRY] [-a {anonymous,elite,transparent}] [--https]
+usage: pscrape [-h] [-c COUNTRY] [-a {anonymous,elite,transparent}] [--https]
                     [-o OUTPUT_FILE]
 
 optional arguments:
@@ -50,7 +50,7 @@ optional arguments:
 Example:
 
 ```
-$ pscraper -c US --https -o /tmp/proxies.txt
+$ pscrape -c US --https -o /tmp/proxies.txt
 ```
 
 ```
